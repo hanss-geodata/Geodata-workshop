@@ -5,33 +5,37 @@ import "./App.css";
 import Map from "./components/Map";
 import RouteWidget from "./components/RouteWidget";
 
-import esriConfig from '@arcgis/core/config.js';
-import IdentityManager from '@arcgis/core/identity/IdentityManager';
-import OAuthInfo from '@arcgis/core/identity/OAuthInfo';
-import Portal from '@arcgis/core/portal/Portal';
+// Klasser nødvendig for å autentisere mot ArcGIS Online
+// import esriConfig from '@arcgis/core/config.js';
+// import IdentityManager from '@arcgis/core/identity/IdentityManager';
+// import OAuthInfo from '@arcgis/core/identity/OAuthInfo';
+// import Portal from '@arcgis/core/portal/Portal';
 
 function App() {
 
-  // Autentiser ved oppstart
+  // TODO: Autentiser ved oppstart
+  // https://developers.arcgis.com/javascript/latest/sample-code/identity-oauth-basic/
   useEffect(() => {
-    esriConfig.portalUrl = "https://ntnu-gis.maps.arcgis.com/";
+    // TODO: Legg inn riktig portalUrl (NTNU's ArcGIS Online konto)
+    // esriConfig.portalUrl = "https://geodata.maps.arcgis.com/";
 
-    var info = new OAuthInfo({
-      appId: "id3Q2AFr5FLf1nOY",
-      // Uncomment the next line and update if using your own portal
-      portalUrl: esriConfig.portalUrl,
-      popup: false
-    });
-    const portal = new Portal(esriConfig.portalItem);
+    // var info = new OAuthInfo({
+    //   // TODO: Legg inn riktig appId (clientid) opprettet på developers.arcgis.com
+    //   appId: "id3Q2AFr5FLf1nOY",
+    //   // Uncomment the next line and update if using your own portal
+    //   portalUrl: esriConfig.portalUrl,
+    //   popup: false
+    // });
+    // const portal = new Portal(esriConfig.portalItem);
 
-    IdentityManager.registerOAuthInfos([info]);
-    IdentityManager.getCredential(esriConfig.portalUrl + "/sharing").then((res) => {
-      portal.load();
-    });
+    // IdentityManager.registerOAuthInfos([info]);
+    // IdentityManager.getCredential(esriConfig.portalUrl + "/sharing").then((res) => {
+    //   portal.load();
+    // });
   }, []);
 
   // Opprett store som sendes rundt til ulike komponenter
-  const [mapView, setMapView] = useState(null);
+  const [mapView, setMapView] = useState(null); // Vi tar vare på mapView objektet så vi får tilgang til dette overalt
   const [point, setPoint] = useState({ //Create a point
     type: "point",
     latitude: 63.4305,
