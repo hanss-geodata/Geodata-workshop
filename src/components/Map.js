@@ -55,24 +55,23 @@ const Map = () => {
 
                         // TODO: Initialisere Locate-widget og legge denne til i kartviewet
                         // https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Locate.html
-                        // const locateWidget = "???"
-                                                
+                        // const locateWidget = ...
+                        
+                        // TODO: Legge til click event på kartet, og bruke klikkets koordinat som ruteberegnerens startpunkt
+                        // https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html#event-click
+                        // mapView.on(...);
+
                         // TODO: Når locate-widget lokaliserer, sett ruteberegnerens startpunkt
-                        // locateWidget.on("locate", function(locateEvent){
+                        // locateWidget.on(..., function(locateEvent){
                         //       if (locateEvent.position.coords) {
                         //             context.point.set(
                         //                   {
                         //                         type: "point",
-                        //                         latitude: locateEvent.position.coords.latitude,
-                        //                         longitude: locateEvent.position.coords.longitude
+                        //                         latitude: ...,
+                        //                         longitude: ...
                         //                   }
                         //             )
                         //       }
-                        // });
-
-                        // TODO: Legge til click event på kartet, og bruke klikkets koordinat som ruteberegnerens startpunkt
-                        // mapView.on("click", (event) => {
-                        //       context.point.set(event.mapPoint);
                         // });
 
                         context.mapView.set(mapView);

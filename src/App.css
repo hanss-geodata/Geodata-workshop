@@ -19,16 +19,7 @@
   background-color: white;
 }
 
+/* TODO: Lag en klasse for widgetContainer i mobilmodus */
 .widgetContainerMobile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  position: fixed;
-  right: 0px;
-  left: 0px;
-  bottom: 0px;
-  height: auto; 
-  background-color: white;
+
 }
