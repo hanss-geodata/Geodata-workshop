@@ -1,35 +1,57 @@
-import React, { useRef, useEffect } from "react";
-import MapView from "@arcgis/core/views/MapView";
-import WebMap from "@arcgis/core/WebMap";
-import esriConfig from '@arcgis/core/config.js';
+import React, { useRef, useEffect, useState } from "react";
+import { AppContext } from "./state/context";
 
 import "./App.css";
+import Map from "./components/Map";
+import RouteWidget from "./components/RouteWidget";
+
+import esriConfig from '@arcgis/core/config.js';
+import IdentityManager from '@arcgis/core/identity/IdentityManager';
+import OAuthInfo from '@arcgis/core/identity/OAuthInfo';
+import Portal from '@arcgis/core/portal/Portal';
 
 function App() {
 
-  // Required: Set this property to insure assets resolve correctly.
-  esriConfig.assetsPath = './assets'; 
-  // esriConfig.portalUrl = 'https://geodata.maps.arcgis.com/'; 
-
-  const mapDiv = useRef(null);
-
+  // Autentiser ved oppstart
   useEffect(() => {
-    if (mapDiv.current) {
-      const map = new WebMap({
-        portalItem: { // autocasts as new PortalItem()
-          id: "e48190cc1b8b409c8d01ef6685cb42a4"  // ID of the WebScene on arcgis.com
-        }
-      });
+    esriConfig.portalUrl = "https://ntnu-gis.maps.arcgis.com/";
 
-      const mapView = new MapView({
-        map: map,
-        container: mapDiv.current,
-      }).when((mapView) => {
-      });
-    }
+    var info = new OAuthInfo({
+      appId: "id3Q2AFr5FLf1nOY",
+      // Uncomment the next line and update if using your own portal
+      portalUrl: esriConfig.portalUrl,
+      popup: false
+    });
+    const portal = new Portal(esriConfig.portalItem);
+
+    IdentityManager.registerOAuthInfos([info]);
+    IdentityManager.getCredential(esriConfig.portalUrl + "/sharing").then((res) => {
+      portal.load();
+    });
   }, []);
 
-  return <div className="mapDiv" ref={mapDiv}></div>;
+  // Opprett store som sendes rundt til ulike komponenter
+  const [mapView, setMapView] = useState(null);
+  const [point, setPoint] = useState({ //Create a point
+    type: "point",
+    latitude: 63.4305,
+    longitude: 10.4500
+  });
+
+  const store = {
+    mapView: { value: mapView, set: setMapView },
+    point: { value: point, set: setPoint },
+  }
+
+  return (
+    <AppContext.Provider value={store}>
+      <div style={{ height: "100%", width: "100%" }}>
+        <Map/>
+        <RouteWidget />
+      </div>
+    </AppContext.Provider>
+
+  );
 }
 
 export default App;
