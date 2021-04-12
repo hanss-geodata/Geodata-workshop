@@ -17,30 +17,26 @@ const Map = () => {
 
       const mapDiv = useRef(null);
 
-      // Tegn punktgrafikk 
-      // useEffect(() => {
-      //       if (context.mapView.value) {
-      //             const mapView = context.mapView.value;
+      // TODO: Tegn punktgrafikk 
+      useEffect(() => {
+            if (context.mapView.value) {
+                  // https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-GraphicsLayer.html#methods-summary
+                  const mapView = context.mapView.value;
                   
-      //             mapView.graphics.removeAll();
+                  // TODO: Tøm mapviewet sitt graphics layer
 
-      //             const simpleMarkerSymbol = {
-      //                   type: "simple-marker",
-      //                   color: [226, 119, 40],  // Orange
-      //                   outline: {
-      //                         color: [255, 255, 255], // White
-      //                         width: 1
-      //                   }
-      //             };
+                  // TODO: Opprett et symbol for punktet
+                  // https://developers.arcgis.com/javascript/latest/api-reference/esri-symbols-SimpleMarkerSymbol.html
+                  const simpleMarkerSymbol = {};
 
-      //             const pointGraphic = new Graphic({
-      //                   geometry: context.point.value,
-      //                   symbol: simpleMarkerSymbol
-      //             });
+                  const pointGraphic = new Graphic({
+                        geometry: context.point.value,
+                        symbol: simpleMarkerSymbol
+                  });
 
-      //             mapView.graphics.add(pointGraphic);
-      //       }
-      // }, [context.point.value, context.mapView.value]);
+                  // TODO: Legg til punktet i mapviewet sitt graphics layer
+            }
+      }, [context.point.value, context.mapView.value]);
 
       // Opprett kartet
       useEffect(() => {

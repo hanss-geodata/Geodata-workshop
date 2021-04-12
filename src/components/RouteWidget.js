@@ -12,7 +12,7 @@ const RouteWidget = () => {
       const [length, setLength] = useState(0); // Lengde på kalkulert rute
       const [radius, setRadius] = useState(1.5); // Radius rundt brukerens posisjon
 
-      // TODO: Kalkuler ca antall skritt basert på rutens lengde. 
+      // TODO: Kalkuler ca antall skritt basert på rutens lengde. 1 km = ca 1400 skritt
       const getSteps = (length) => {
       }
 
@@ -28,17 +28,13 @@ const RouteWidget = () => {
                   const oldLine = mapView.graphics.items.filter((item) => { return item.geometry.type === "polyline" })[0];
                   mapView.graphics.remove(oldLine);
 
-                  // TODO: Legg til ruten i kartet. 
                   const route = result.routeResults[0].route;
-
-                  // TODO: Hva er feil med symbologien?
+                  
+                  // TODO: Legg til et symbol for polylinjen
                   // https://developers.arcgis.com/javascript/latest/api-reference/esri-symbols-SimpleLineSymbol.html
-                  // route.symbol = {
-                  //       type: "simpleline",
-                  //       color: "#3f51b5",
-                  //       width: "2"
-                  // };
-
+                  route.symbol = {};
+                  
+                  // TODO: Legg til ruten i kartet. 
                   // // https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html#graphics
                   // mapView.graphics.???;
 
